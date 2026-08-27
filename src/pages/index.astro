@@ -1,0 +1,207 @@
+---
+const LINE_URL = 'https://lin.ee/sBa080U';
+
+const works = [
+  {
+    num: '01',
+    title: '占い・オーラ鑑定 LP',
+    desc: '友人と営む事業のページ。企画から制作まで',
+  },
+  {
+    num: '02',
+    title: '美容室紹介ページ',
+    desc: 'お店の雰囲気とメニューを1枚で伝える構成',
+  },
+  {
+    num: '03',
+    title: 'ハンドメイド雑貨のネットショップ',
+    desc: '商品の並べ方と購入までの流れを整理',
+  },
+  {
+    num: '04',
+    title: '企業紹介サイト',
+    desc: '会社の情報を必要な人に届くかたちに',
+  },
+];
+
+const services = [
+  {
+    title: 'ホームページ制作',
+    desc: '初回制作は無料。公開後の更新・修正サポートは月額1万円です。',
+    accent: 'border-accent',
+  },
+  {
+    title: 'SNS運用サポート',
+    desc: '投稿の計画づくりから、実際の投稿作業までお手伝いします。',
+    accent: 'border-accent-soft',
+  },
+  {
+    title: '動画作成',
+    desc: 'TikTok・Instagram向けの短い動画を、素材から仕上げまで。',
+    accent: 'border-accent-soft',
+  },
+  {
+    title: '事業企画・相談',
+    desc: 'やりたいことを整理して、次に何をするか一緒に決めます。',
+    accent: 'border-accent-soft',
+  },
+];
+
+const guides = [
+  'つくりたいサイトのイメージ相談',
+  '進め方とスケジュールのご案内',
+  '公開までに必要なものの確認',
+];
+---
+
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>あや ｜ 公式サイト</title>
+  <meta name="description" content="愛媛県今治市で、AIを使ったホームページ制作・SNS運用・動画づくりに取り組んでいます。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body class="m-0 bg-page text-ink font-body antialiased">
+  <div class="min-h-full bg-page flex justify-center">
+    <div class="w-full max-w-[600px] bg-white shadow-[0_0_0_1px_#e4ecf5]">
+
+      <!-- header -->
+      <header class="px-6 py-5 flex items-center justify-between border-b border-line">
+        <span class="font-heading font-bold text-[17px] tracking-[0.04em]">あや</span>
+        <span class="text-xs text-faint tracking-[0.08em]">EHIME / IMABARI</span>
+      </header>
+
+      <!-- hero -->
+      <section class="px-6 pt-[52px] pb-11 bg-gradient-to-b from-white to-band">
+        <p class="m-0 mb-[18px] text-[13px] font-medium text-accent tracking-[0.06em] leading-[1.7]">
+          ホームページを持ちたい個人・小さなお店の方へ
+        </p>
+        <h1 class="m-0 mb-6 font-heading font-bold text-[31px] leading-[1.55] tracking-[0.01em]">
+          AIで手を動かして、<br />あなたのサイトを<br />形にします。
+        </h1>
+        <p class="m-0 mb-8 text-[15px] leading-[2.0] text-muted">
+          初回の制作は無料。公開したあとの更新や運用も、月額1万円で一緒に続けていきます。動画やSNSの相談もまとめて受けられます。
+        </p>
+        <a
+          href={LINE_URL}
+          target="_blank"
+          rel="noopener"
+          class="flex items-center justify-center h-[60px] rounded-lg bg-accent text-white text-base font-bold tracking-[0.03em] transition-colors hover:bg-accent-dark"
+        >
+          LINEで相談する
+        </a>
+        <p class="m-0 mt-3.5 text-center text-xs text-fainter leading-[1.8]">
+          相談だけでも大丈夫です。返信は夜になることがあります。
+        </p>
+      </section>
+
+      <!-- about -->
+      <section class="px-6 pt-[52px] pb-[52px] border-t border-line">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">ABOUT</p>
+        <h2 class="m-0 mb-[26px] font-heading font-bold text-[22px] leading-[1.6]">
+          昼はタオルの街で、夜はAIで。
+        </h2>
+        <p class="m-0 text-[15px] leading-[2.1] text-muted">
+          愛媛県今治市で、今治タオルの製造とリモートカスタマーサポートをしながら、夜はAIを使ったホームページ制作・SNS運用・動画づくりに取り組んでいます。友人と営む占い・オーラ鑑定事業のホームページも自分で制作。地域にまだ少ない「AIで手を動かして形にする人」として、身近な一件から丁寧にお手伝いしています。
+        </p>
+      </section>
+
+      <!-- works -->
+      <section class="px-6 pt-[52px] pb-[52px] bg-panel border-t border-line">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">WORKS</p>
+        <h2 class="m-0 mb-2 font-heading font-bold text-[22px] leading-[1.6]">制作実績</h2>
+        <p class="m-0 mb-7 text-sm leading-[1.9] text-faint">
+          これまでに4サイト。業種も目的もそれぞれ違います。
+        </p>
+        <div class="flex flex-col gap-3">
+          {works.map((w) => (
+            <div class="flex items-baseline gap-3.5 bg-white border border-line-2 rounded-lg px-5 py-5">
+              <span class="text-xs font-bold text-[#9db6cd] tracking-[0.06em] flex-none">{w.num}</span>
+              <div>
+                <p class="m-0 mb-1 text-[15px] font-medium leading-[1.7]">{w.title}</p>
+                <p class="m-0 text-[13px] text-fainter leading-[1.8]">{w.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p class="m-0 mt-6 pt-[22px] border-t border-line-2 text-sm leading-[2.0] text-muted">
+          TikTok・Instagram動画の制作・編集にも対応しています。
+        </p>
+      </section>
+
+      <!-- services -->
+      <section class="px-6 pt-[52px] pb-[52px] border-t border-line">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">SERVICES</p>
+        <h2 class="m-0 mb-7 font-heading font-bold text-[22px] leading-[1.6]">できること</h2>
+        <div class="flex flex-col gap-[26px]">
+          {services.map((s) => (
+            <div class={`pl-4 border-l-[3px] ${s.accent}`}>
+              <p class="m-0 mb-1.5 text-[17px] font-bold font-heading leading-[1.6]">{s.title}</p>
+              <p class="m-0 mb-2 text-sm leading-[2.0] text-muted">{s.desc}</p>
+              <p class="m-0 text-[13px] text-fainter leading-[1.8]">詳しくはCONTACTから</p>
+            </div>
+          ))}
+        </div>
+        <a
+          href={LINE_URL}
+          target="_blank"
+          rel="noopener"
+          class="mt-[34px] flex items-center justify-center h-[60px] rounded-lg bg-accent text-white text-base font-bold tracking-[0.03em] transition-colors hover:bg-accent-dark"
+        >
+          サービスについて聞いてみる
+        </a>
+      </section>
+
+      <!-- guides -->
+      <section class="px-6 pt-[52px] pb-[52px] bg-band border-t border-band-line">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">GUIDES</p>
+        <h2 class="m-0 mb-5 font-heading font-bold text-[22px] leading-[1.6]">LINEでできること</h2>
+        <div class="flex flex-col gap-3.5 mb-2">
+          {guides.map((g) => (
+            <p class="m-0 text-[15px] leading-[2.0] text-muted">・{g}</p>
+          ))}
+        </div>
+        <p class="m-0 mt-5 text-[13px] text-faint leading-[1.9]">
+          資料の配布はこれから準備します。準備できたらLINEでお知らせします。
+        </p>
+      </section>
+
+      <!-- contact -->
+      <section class="px-6 pt-14 pb-[60px] border-t border-line">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">CONTACT</p>
+        <h2 class="m-0 mb-5 font-heading font-bold text-[22px] leading-[1.6]">
+          お問い合わせ・お仕事のご依頼
+        </h2>
+        <p class="m-0 mb-[30px] text-[15px] leading-[2.1] text-muted">
+          LINE公式アカウントから受け付けています。「サイトをつくりたい」の一言だけでも大丈夫です。そこから一緒に考えます。
+        </p>
+        <a
+          href={LINE_URL}
+          target="_blank"
+          rel="noopener"
+          class="flex items-center justify-center h-[62px] rounded-lg bg-accent text-white text-base font-bold tracking-[0.03em] transition-colors hover:bg-accent-dark"
+        >
+          LINEで問い合わせる
+        </a>
+        <p class="m-0 mt-4 text-center text-xs text-fainter leading-[1.9]">
+          LINE公式アカウント｜lin.ee/sBa080U
+        </p>
+      </section>
+
+      <!-- footer -->
+      <footer class="px-6 py-6 bg-ink text-[#93a8bf] flex items-center justify-between">
+        <span class="text-[13px] font-medium text-white font-heading">あや</span>
+        <span class="text-[11px] tracking-[0.06em]">© 2026</span>
+      </footer>
+
+    </div>
+  </div>
+</body>
+</html>
