@@ -1,4 +1,5 @@
 ---
+const SITE_URL = 'https://alpine-site.dmea8287-love2.workers.dev';
 const LINE_URL = 'https://lin.ee/sBa080U';
 
 const works = [
@@ -59,8 +60,25 @@ const guides = [
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>あや ｜ 公式サイト</title>
+  <title>Alpine ｜ 公式サイト</title>
   <meta name="description" content="愛媛県今治市で、AIを使ったホームページ制作・SNS運用・動画づくりに取り組んでいます。" />
+  <link rel="canonical" href={SITE_URL} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Alpine" />
+  <meta property="og:title" content="Alpine ｜ 公式サイト" />
+  <meta property="og:description" content="愛媛県今治市で、AIを使ったホームページ制作・SNS運用・動画づくりに取り組んでいます。" />
+  <meta property="og:url" content={SITE_URL} />
+  <meta property="og:image" content={`${SITE_URL}/og-image.png`} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ja_JP" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Alpine ｜ 公式サイト" />
+  <meta name="twitter:description" content="愛媛県今治市で、AIを使ったホームページ制作・SNS運用・動画づくりに取り組んでいます。" />
+  <meta name="twitter:image" content={`${SITE_URL}/og-image.png`} />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -74,7 +92,7 @@ const guides = [
 
       <!-- header -->
       <header class="px-6 py-5 flex items-center justify-between border-b border-line">
-        <span class="font-heading font-bold text-[17px] tracking-[0.04em]">あや</span>
+        <span class="font-heading font-bold text-[17px] tracking-[0.04em]">Alpine</span>
         <span class="text-xs text-faint tracking-[0.08em]">EHIME / IMABARI</span>
       </header>
 
@@ -197,7 +215,7 @@ const guides = [
 
       <!-- footer -->
       <footer class="px-6 py-6 bg-ink text-[#93a8bf] flex items-center justify-between">
-        <span class="text-[13px] font-medium text-white font-heading">あや</span>
+        <span class="text-[13px] font-medium text-white font-heading">Alpine</span>
         <span class="text-[11px] tracking-[0.06em]">© 2026</span>
       </footer>
 
