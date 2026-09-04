@@ -5,8 +5,8 @@ const LINE_URL = 'https://lin.ee/sBa080U';
 const works = [
   {
     num: '01',
-    title: '占い・オーラ鑑定 LP',
-    desc: '友人と営む事業のページ。企画から制作まで',
+    title: '占い・オーラ鑑定 LP＋オーラ診断アプリ',
+    desc: '友人と営む事業のページ制作に加え、生年月日・お名前・お顔写真からオーラを鑑定するWebアプリも。顔写真はAIの画像解析で分析、アプリ自体もAI（Claude）を使って開発',
   },
   {
     num: '02',
@@ -23,12 +23,27 @@ const works = [
     title: '企業紹介サイト',
     desc: '会社の情報を必要な人に届くかたちに',
   },
+  {
+    num: '05',
+    title: '毎日のタスク管理アプリ',
+    desc: 'やることリストの未チェック項目を検知して、夜に自動でリマインドメールが届く仕組み',
+  },
+  {
+    num: '06',
+    title: '音声で話しかけられるAIアシスタント',
+    desc: '声で話しかけると、自然な速度で返事をしてくれる仕組み。個人利用中のツール',
+  },
 ];
 
 const services = [
   {
     title: 'ホームページ制作',
     desc: '初回制作は無料。公開後の更新・修正サポートは月額1万円です。',
+    accent: 'border-accent',
+  },
+  {
+    title: '業務アプリ開発',
+    desc: '入札の価格判断や現場の記録など、日々の業務を仕組み化するアプリをつくります。',
     accent: 'border-accent',
   },
   {
@@ -46,6 +61,31 @@ const services = [
     desc: 'やりたいことを整理して、次に何をするか一緒に決めます。',
     accent: 'border-accent-soft',
   },
+];
+
+const appExamples = [
+  {
+    title: '予約・決済の自動化',
+    desc: 'カレンダーとオンライン決済を組み合わせて、今使っている外部サービスの月額費用を減らせないか一緒に考えます。',
+  },
+  {
+    title: '入札・見積もりの効率化',
+    desc: '過去のデータを蓄積して適正な価格が見えるようにしたり、書類作成にかかる時間を減らしたりします。',
+  },
+  {
+    title: '現場記録の効率化',
+    desc: '写真や音声でその場報告するだけで、自動で整理されて、必要な人に通知が届くようにします。',
+  },
+  {
+    title: '気になる情報だけ拾って通知',
+    desc: 'スケジュールや数値など全部を目視で追うのが大変なものは、決めた条件に当てはまるものだけ知らせます。',
+  },
+];
+
+const priceTiers = [
+  { title: 'シンプル型', range: '5万円〜15万円', desc: '単機能の自動化・通知の仕組みなど' },
+  { title: 'スタンダード型', range: '15万円〜40万円', desc: 'データ入力・自動連携など、業務の流れに組み込むアプリ' },
+  { title: 'カスタム型', range: '40万円〜（要見積もり）', desc: 'AIによる判定・複雑なロジックを含むもの' },
 ];
 
 const guides = [
@@ -138,9 +178,9 @@ const guides = [
       <!-- works -->
       <section class="px-6 pt-[52px] pb-[52px] bg-panel border-t border-line">
         <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">WORKS</p>
-        <h2 class="m-0 mb-2 font-heading font-bold text-[22px] leading-[1.6]">制作実績</h2>
+        <h2 class="m-0 mb-2 font-heading font-bold text-[22px] leading-[1.6]">制作サンプル</h2>
         <p class="m-0 mb-7 text-sm leading-[1.9] text-faint">
-          これまでに4サイト。業種も目的もそれぞれ違います。
+          これまでに作った6つのサイト・アプリです。業種も目的もそれぞれ違います。
         </p>
         <div class="flex flex-col gap-3">
           {works.map((w) => (
@@ -171,6 +211,40 @@ const guides = [
             </div>
           ))}
         </div>
+
+        <div class="mt-9 pt-8 border-t border-line-2">
+          <p class="m-0 mb-1 text-[13px] font-bold text-accent tracking-[0.1em]">業務アプリの例</p>
+          <p class="m-0 mb-5 text-[13px] text-faint leading-[1.9]">
+            こんな仕組み化に対応できます。
+          </p>
+          <div class="flex flex-col gap-3">
+            {appExamples.map((e) => (
+              <div class="bg-white border border-line-2 rounded-lg px-5 py-4">
+                <p class="m-0 mb-1 text-[15px] font-medium leading-[1.7]">{e.title}</p>
+                <p class="m-0 text-[13px] text-fainter leading-[1.8]">{e.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-9 pt-8 border-t border-line-2">
+          <p class="m-0 mb-5 text-[13px] font-bold text-accent tracking-[0.1em]">料金の目安</p>
+          <div class="flex flex-col gap-4">
+            {priceTiers.map((t) => (
+              <div class="flex items-baseline justify-between gap-3">
+                <div>
+                  <p class="m-0 text-[15px] font-medium leading-[1.7]">{t.title}</p>
+                  <p class="m-0 text-[13px] text-fainter leading-[1.8]">{t.desc}</p>
+                </div>
+                <span class="flex-none text-[14px] font-bold text-accent whitespace-nowrap">{t.range}</span>
+              </div>
+            ))}
+          </div>
+          <p class="m-0 mt-5 text-[13px] text-fainter leading-[1.8]">
+            実際の金額は、内容をお伺いした上でお見積もりします。
+          </p>
+        </div>
+
         <a
           href={LINE_URL}
           target="_blank"
