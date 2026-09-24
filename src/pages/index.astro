@@ -1,49 +1,75 @@
 ---
 const SITE_URL = 'https://alpine-site.dmea8287-love2.workers.dev';
 const LINE_URL = 'https://lin.ee/sBa080U';
+const LINE_CONSULT_URL = 'https://lin.ee/RuLen1L';
+
+// サイトに置くAIチャットの窓口（中身は alpine-demo 側で動いている）
+const DEMO_API = 'https://alpine-demo.dmea8287-love2.workers.dev/api/chat/alpine';
+const demoQuestions = [
+  'ホームページはいくらかかりますか？',
+  'どんなことを頼めますか？',
+  'このAIも作ってもらえますか？',
+];
 
 const works = [
   {
     num: '01',
     title: '占い・オーラ鑑定 LP＋オーラ診断アプリ',
     desc: '友人と営む事業のページ制作に加え、生年月日・お名前・お顔写真からオーラを鑑定するWebアプリも。顔写真はAIの画像解析で分析、アプリ自体もAI（Claude）を使って開発',
+    images: ['/works/work-01.jpg', '/works/work-01b.jpg'],
   },
   {
     num: '02',
     title: '美容室紹介ページ',
-    desc: 'お店の雰囲気とメニューを1枚で伝える構成',
+    desc: 'サロンの雰囲気が伝わるフォトギャラリーと、メニュー・アクセス情報をまとめた紹介ページ。',
+    images: ['/works/work-02.jpg'],
   },
   {
     num: '03',
     title: 'ハンドメイド雑貨のネットショップ',
-    desc: '商品の並べ方と購入までの流れを整理',
+    desc: 'ピアス・イヤリングなどのハンドメイドアクセサリーを、カテゴリ別に見やすく並べたネットショップ。',
+    images: ['/works/work-03.jpg'],
   },
   {
     num: '04',
     title: '企業紹介サイト',
-    desc: '会社の情報を必要な人に届くかたちに',
+    desc: '会社概要・事業内容・サービス案内をまとめた、企業向けの紹介サイト。',
+    images: ['/works/work-04.jpg'],
   },
   {
     num: '05',
     title: '毎日のタスク管理アプリ',
     desc: 'やることリストの未チェック項目を検知して、夜に自動でリマインドメールが届く仕組み',
   },
-  {
-    num: '06',
-    title: '音声で話しかけられるAIアシスタント',
-    desc: '声で話しかけると、自然な速度で返事をしてくれる仕組み。個人利用中のツール',
-  },
 ];
 
 const services = [
   {
-    title: 'ホームページ制作',
-    desc: '初回制作は無料。独自ドメインが必要な場合も含め、公開後の更新・修正サポートは月額1万円です。',
+    title: 'ホームページ制作 ＋ お店のことを覚えたAI',
+    desc: 'お店のホームページと、そのお店のことを覚えたAIを、ひとつにまとめてお作りします。AIは、お店の情報をひとつにまとめるための部品なので、別料金にしていません。',
+    accent: 'border-accent',
+    price: [
+      {
+        label: '制作費',
+        was: '100,000円',
+        now: '0円',
+        note: '本来であれば10万円ほどをいただく内容ですが、事例としてご紹介させていただくことと引き換えに、いただいていません。',
+      },
+      {
+        label: '月額',
+        now: '10,000円',
+        note: '公開したあとの更新・修正、お店の情報の入れ替え、AIの調整。独自ドメインが必要な場合も、この中に含みます。',
+      },
+    ],
+  },
+  {
+    title: 'お店の仕組み化',
+    desc: 'お店によって、手間になっていることは違います。「お困りごと」を伺って、そのお店に合った仕組みをつくります。どんなものが作れるかは、下の例をご覧ください。内容に応じてお見積もりします。',
     accent: 'border-accent',
   },
   {
-    title: '業務アプリ開発',
-    desc: '公式LINEのポイントカード導入や予約受付など、お店の日々の業務を仕組み化するアプリをつくります。',
+    title: 'AIの使い方をお教えする',
+    desc: 'お客様への返信文、メニューの紹介、チラシづくり、SNSの投稿。「自分でも使えるようになりたい」という方に、使い方をお教えすることもできます。',
     accent: 'border-accent',
   },
   {
@@ -84,12 +110,10 @@ const appExamples = [
     title: '在庫・仕入れの記録',
     desc: '食材や消耗品の残りを記録して、発注するタイミングの目安が分かるようにします。',
   },
-];
-
-const priceTiers = [
-  { title: 'シンプル型', range: '5万円〜15万円', desc: 'リマインド通知など、単機能の自動化' },
-  { title: 'スタンダード型', range: '15万円〜40万円', desc: '公式LINEでの予約受付など、日々の業務に組み込むアプリ' },
-  { title: 'カスタム型', range: '40万円〜（要見積もり）', desc: '複数の業務をまとめて仕組み化するもの' },
+  {
+    title: '請求書の自動作成',
+    desc: '必要な項目を入力するだけで、請求書をPDFで自動作成できる仕組みにします。',
+  },
 ];
 
 const guides = [
@@ -97,13 +121,23 @@ const guides = [
   '進め方とスケジュールのご案内',
   '公開までに必要なものの確認',
 ];
+
+const navItems = [
+  { id: 'demo', label: 'Demo' },
+  { id: 'about', label: 'About' },
+  { id: 'works', label: 'Works' },
+  { id: 'services', label: 'Services' },
+  { id: 'guides', label: 'Guides' },
+  { id: 'contact', label: 'Contact' },
+];
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang="ja" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="/alpine-icon.png" />
   <title>Alpine ｜ 公式サイト</title>
   <meta name="description" content="愛媛県今治市で、AIを使ったホームページ制作・SNS運用・動画づくりに取り組んでいます。" />
   <link rel="canonical" href={SITE_URL} />
@@ -139,21 +173,48 @@ const guides = [
     <div class="w-full max-w-[600px] bg-white shadow-[0_0_0_1px_#e4ecf5]">
 
       <!-- header -->
-      <header class="px-6 py-5 flex items-center justify-between border-b border-line">
-        <span class="font-heading font-bold text-[17px] tracking-[0.04em]">Alpine</span>
-        <span class="text-xs text-faint tracking-[0.08em]">EHIME / IMABARI</span>
+      <header id="top" class="border-b border-line">
+        <input type="checkbox" id="nav-toggle" class="peer hidden" />
+        <div class="px-6 py-5 flex items-center justify-between">
+          <a href="#top" class="flex items-center gap-2.5">
+            <img src="/alpine-icon.png" alt="Alpine" class="w-8 h-8 rounded-full" />
+            <span class="font-heading font-bold text-[17px] tracking-[0.04em]">Alpine</span>
+          </a>
+          <nav class="hidden sm:flex items-center gap-5">
+            {navItems.map((n) => (
+              <a href={`#${n.id}`} class="text-xs font-medium text-faint tracking-[0.06em] hover:text-accent transition-colors">
+                {n.label}
+              </a>
+            ))}
+          </nav>
+          <label for="nav-toggle" class="sm:hidden flex flex-col justify-center gap-[5px] w-9 h-9 cursor-pointer" aria-label="メニューを開く">
+            <span class="block h-[1.5px] bg-ink"></span>
+            <span class="block h-[1.5px] bg-ink"></span>
+            <span class="block h-[1.5px] bg-ink"></span>
+          </label>
+        </div>
+        <nav id="mobile-nav" class="hidden peer-checked:flex sm:hidden flex-col px-6 pb-4 gap-0 border-t border-line">
+          {navItems.map((n) => (
+            <a href={`#${n.id}`} class="py-3 text-sm font-medium text-ink border-b border-line-2 last:border-b-0">
+              {n.label}
+            </a>
+          ))}
+        </nav>
       </header>
 
       <!-- hero -->
       <section class="px-6 pt-[52px] pb-11 bg-gradient-to-b from-white to-band">
         <p class="m-0 mb-[18px] text-[13px] font-medium text-accent tracking-[0.06em] leading-[1.7]">
-          ホームページを持ちたい個人・小さなお店の方へ
+          個人事業主・小さなお店・企業のご担当者様へ
         </p>
-        <h1 class="m-0 mb-6 font-heading font-bold text-[31px] leading-[1.55] tracking-[0.01em]">
-          AIで手を動かして、<br />あなたのサイトを<br />形にします。
+        <h1 class="m-0 mb-6 font-heading font-bold text-[30px] leading-[1.55] tracking-[0.01em]">
+          お店の手間を、<br />AIで減らしませんか。
         </h1>
-        <p class="m-0 mb-8 text-[15px] leading-[2.0] text-muted">
-          初回の制作は無料。公開したあとの更新や運用も、月額1万円で一緒に続けていきます。動画やSNSの相談もまとめて受けられます。
+        <p class="m-0 mb-4 text-[15px] leading-[2.0] text-muted">
+          愛媛・今治で、お店のホームページと、そのお店のことを覚えたAIを作っています。「人がやらなくていい仕事」を、AIに渡すお手伝いです。
+        </p>
+        <p class="m-0 mb-8 text-[13.5px] leading-[1.95] text-fainter">
+          昼はタオル工場で働きながら、夜にこの仕事をしています。
         </p>
         <a
           href={LINE_URL}
@@ -168,8 +229,66 @@ const guides = [
         </p>
       </section>
 
+      <!-- demo -->
+      <section id="demo" class="px-6 pt-[52px] pb-[52px] bg-band border-t border-band-line">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">DEMO</p>
+        <h2 class="m-0 mb-3 font-heading font-bold text-[22px] leading-[1.6]">
+          試しに、触ってみてください
+        </h2>
+        <p class="m-0 mb-6 text-[14.5px] leading-[2.0] text-muted">
+          下のAIは、Alpineのことだけを覚えています。料金や、できることを聞いてみてください。わたしの代わりに答えます。<br />
+          お店のホームページには、<b class="font-bold text-ink">そのお店のことを覚えたAI</b>が、この形でついてきます。
+        </p>
+
+        <div class="bg-white border border-line-2 rounded-xl overflow-hidden">
+          <div class="flex items-center gap-2.5 px-5 py-3.5 border-b border-line-2 bg-panel">
+            <span class="flex items-center justify-center w-7 h-7 rounded-full bg-accent-tint text-[13px]">🤖</span>
+            <span class="text-[13px] font-bold tracking-[0.04em]">Alpineのことを覚えたAI</span>
+          </div>
+
+          <div id="chat-log" class="flex flex-col gap-3 px-5 py-5 min-h-[168px] max-h-[360px] overflow-y-auto">
+            <div class="self-start max-w-[86%] rounded-xl border border-line-2 bg-panel px-4 py-3 text-[14px] leading-[1.9] text-ink">
+              こんにちは。Alpineのことを覚えたAIです。料金や、できることをお聞きください。
+            </div>
+          </div>
+
+          <div id="chat-chips" class="flex flex-wrap gap-2 px-5 pb-4">
+            {demoQuestions.map((q) => (
+              <button
+                type="button"
+                data-q={q}
+                class="chat-chip rounded-full border border-accent-soft bg-white px-3.5 py-2 text-[12.5px] leading-none text-accent-dark transition-colors hover:bg-accent-tint"
+              >
+                {q}
+              </button>
+            ))}
+          </div>
+
+          <form id="chat-form" class="flex items-center gap-2 px-5 pb-5">
+            <input
+              id="chat-input"
+              type="text"
+              maxlength="200"
+              autocomplete="off"
+              placeholder="聞いてみたいことを入力"
+              class="flex-1 min-w-0 h-[46px] rounded-lg border border-line-2 bg-white px-3.5 text-[14px] text-ink placeholder:text-fainter focus:outline-none focus:border-accent-soft"
+            />
+            <button
+              type="submit"
+              class="flex-none h-[46px] px-5 rounded-lg bg-accent text-white text-[14px] font-bold tracking-[0.04em] transition-colors hover:bg-accent-dark disabled:opacity-50"
+            >
+              送信
+            </button>
+          </form>
+        </div>
+
+        <p class="m-0 mt-3.5 text-[12px] leading-[1.9] text-fainter">
+          AIが答えているので、実際と違うことがあります。お申し込みやお見積もりは、LINEから承ります。
+        </p>
+      </section>
+
       <!-- about -->
-      <section class="px-6 pt-[52px] pb-[52px] border-t border-line">
+      <section id="about" class="px-6 pt-[52px] pb-[52px] border-t border-line">
         <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">ABOUT</p>
         <h2 class="m-0 mb-[26px] font-heading font-bold text-[22px] leading-[1.6]">
           昼はタオルの街で、夜はAIで。
@@ -180,19 +299,28 @@ const guides = [
       </section>
 
       <!-- works -->
-      <section class="px-6 pt-[52px] pb-[52px] bg-panel border-t border-line">
+      <section id="works" class="px-6 pt-[52px] pb-[52px] bg-panel border-t border-line">
         <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">WORKS</p>
         <h2 class="m-0 mb-2 font-heading font-bold text-[22px] leading-[1.6]">制作サンプル</h2>
         <p class="m-0 mb-7 text-sm leading-[1.9] text-faint">
-          これまでに作った6つのサイト・アプリです。業種も目的もそれぞれ違います。
+          これまでに作ったサイト・アプリです。業種も目的もそれぞれ違います。
         </p>
         <div class="flex flex-col gap-3">
           {works.map((w) => (
-            <div class="flex items-baseline gap-3.5 bg-white border border-line-2 rounded-lg px-5 py-5">
-              <span class="text-xs font-bold text-[#9db6cd] tracking-[0.06em] flex-none">{w.num}</span>
-              <div>
-                <p class="m-0 mb-1 text-[15px] font-medium leading-[1.7]">{w.title}</p>
-                <p class="m-0 text-[13px] text-fainter leading-[1.8]">{w.desc}</p>
+            <div class="bg-white border border-line-2 rounded-lg overflow-hidden">
+              {w.images && (
+                <div class={`grid ${w.images.length > 1 ? 'grid-cols-2 gap-px' : ''} border-b border-line-2`}>
+                  {w.images.map((src) => (
+                    <img src={src} alt={w.title} class="w-full h-full object-cover block" loading="lazy" />
+                  ))}
+                </div>
+              )}
+              <div class="flex items-baseline gap-3.5 px-5 py-5">
+                <span class="text-xs font-bold text-[#9db6cd] tracking-[0.06em] flex-none">{w.num}</span>
+                <div>
+                  <p class="m-0 mb-1 text-[15px] font-medium leading-[1.7]">{w.title}</p>
+                  <p class="m-0 text-[13px] text-fainter leading-[1.8]">{w.desc}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -203,7 +331,7 @@ const guides = [
       </section>
 
       <!-- services -->
-      <section class="px-6 pt-[52px] pb-[52px] border-t border-line">
+      <section id="services" class="px-6 pt-[52px] pb-[52px] border-t border-line">
         <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">SERVICES</p>
         <h2 class="m-0 mb-7 font-heading font-bold text-[22px] leading-[1.6]">できること</h2>
         <div class="flex flex-col gap-[26px]">
@@ -211,6 +339,22 @@ const guides = [
             <div class={`pl-4 border-l-[3px] ${s.accent}`}>
               <p class="m-0 mb-1.5 text-[17px] font-bold font-heading leading-[1.6]">{s.title}</p>
               <p class="m-0 mb-2 text-sm leading-[2.0] text-muted">{s.desc}</p>
+              {s.price && (
+                <div class="mt-3.5 mb-3 rounded-lg border border-line-2 bg-panel px-4 py-3.5 flex flex-col gap-3">
+                  {s.price.map((r) => (
+                    <div>
+                      <div class="flex items-baseline gap-2.5">
+                        <span class="text-[13px] font-bold text-faint tracking-[0.06em] w-[44px] flex-none">{r.label}</span>
+                        {r.was && (
+                          <span class="text-[13px] text-fainter line-through decoration-[1.5px]">{r.was}</span>
+                        )}
+                        <span class="text-[17px] font-bold text-accent-dark">{r.now}</span>
+                      </div>
+                      <p class="m-0 mt-1 text-[12.5px] leading-[1.85] text-fainter">{r.note}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
               <p class="m-0 text-[13px] text-fainter leading-[1.8]">詳しくはCONTACTから</p>
             </div>
           ))}
@@ -219,7 +363,7 @@ const guides = [
         <div class="mt-9 pt-8 border-t border-line-2">
           <p class="m-0 mb-1 text-[13px] font-bold text-accent tracking-[0.1em]">業務アプリの例</p>
           <p class="m-0 mb-5 text-[13px] text-faint leading-[1.9]">
-            こんな仕組み化に対応できます。
+            たとえば、こんな仕組みがつくれます。ここにないことでも、お店に合わせて考えますので、まずはご相談ください。
           </p>
           <div class="flex flex-col gap-3">
             {appExamples.map((e) => (
@@ -229,24 +373,6 @@ const guides = [
               </div>
             ))}
           </div>
-        </div>
-
-        <div class="mt-9 pt-8 border-t border-line-2">
-          <p class="m-0 mb-5 text-[13px] font-bold text-accent tracking-[0.1em]">料金の目安</p>
-          <div class="flex flex-col gap-4">
-            {priceTiers.map((t) => (
-              <div class="flex items-baseline justify-between gap-3">
-                <div>
-                  <p class="m-0 text-[15px] font-medium leading-[1.7]">{t.title}</p>
-                  <p class="m-0 text-[13px] text-fainter leading-[1.8]">{t.desc}</p>
-                </div>
-                <span class="flex-none text-[14px] font-bold text-accent whitespace-nowrap">{t.range}</span>
-              </div>
-            ))}
-          </div>
-          <p class="m-0 mt-5 text-[13px] text-fainter leading-[1.8]">
-            実際の金額は、内容をお伺いした上でお見積もりします。
-          </p>
         </div>
 
         <a
@@ -260,7 +386,7 @@ const guides = [
       </section>
 
       <!-- guides -->
-      <section class="px-6 pt-[52px] pb-[52px] bg-band border-t border-band-line">
+      <section id="guides" class="px-6 pt-[52px] pb-[52px] bg-band border-t border-band-line">
         <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">GUIDES</p>
         <h2 class="m-0 mb-5 font-heading font-bold text-[22px] leading-[1.6]">LINEでできること</h2>
         <div class="flex flex-col gap-3.5 mb-2">
@@ -271,7 +397,7 @@ const guides = [
       </section>
 
       <!-- contact -->
-      <section class="px-6 pt-14 pb-[60px] border-t border-line">
+      <section id="contact" class="px-6 pt-14 pb-[60px] border-t border-line">
         <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">CONTACT</p>
         <h2 class="m-0 mb-5 font-heading font-bold text-[22px] leading-[1.6]">
           お問い合わせ・お仕事のご依頼
@@ -290,6 +416,21 @@ const guides = [
         <p class="m-0 mt-4 text-center text-xs text-fainter leading-[1.9]">
           LINE公式アカウント｜lin.ee/sBa080U
         </p>
+
+        <div class="mt-8 rounded-lg border border-dashed border-accent-soft bg-accent-tint px-5 py-[18px]">
+          <p class="m-0 mb-1.5 text-[13px] font-bold text-accent-dark">じっくり相談したい方へ</p>
+          <p class="m-0 mb-3.5 text-[13px] leading-[1.9] text-[#3d5a56]">
+            AI活用のこと、ホームページのこと、日々の業務のこと。どこから相談すればいいか分からなくても大丈夫です。無料のオンライン相談（30分）も承っています。
+          </p>
+          <a
+            href={LINE_CONSULT_URL}
+            target="_blank"
+            rel="noopener"
+            class="flex items-center justify-center h-[46px] rounded-lg bg-white border-[1.5px] border-accent-soft text-accent-dark text-[13.5px] font-bold tracking-[0.02em] transition-colors hover:bg-accent-tint"
+          >
+            LINEでオンライン相談を申し込む
+          </a>
+        </div>
       </section>
 
       <!-- footer -->
@@ -300,5 +441,112 @@ const guides = [
 
     </div>
   </div>
+
+  <a
+    href="#top"
+    id="back-to-top"
+    aria-label="ページの先頭へ戻る"
+    class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-11 h-11 rounded-full bg-ink text-white shadow-lg opacity-0 pointer-events-none transition-opacity duration-300"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  </a>
+
+  <script>
+    const navToggle = document.getElementById('nav-toggle') as HTMLInputElement | null;
+    document.querySelectorAll('#mobile-nav a, header nav a').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (navToggle) navToggle.checked = false;
+      });
+    });
+
+    const backToTop = document.getElementById('back-to-top');
+    if (backToTop) {
+      const toggleVisibility = () => {
+        if (window.scrollY > 400) {
+          backToTop.classList.remove('opacity-0', 'pointer-events-none');
+          backToTop.classList.add('opacity-100');
+        } else {
+          backToTop.classList.add('opacity-0', 'pointer-events-none');
+          backToTop.classList.remove('opacity-100');
+        }
+      };
+      window.addEventListener('scroll', toggleVisibility, { passive: true });
+      toggleVisibility();
+    }
+
+    // ── AIチャット（中身は alpine-demo 側で動いている） ──
+    const chatForm = document.getElementById('chat-form') as HTMLFormElement | null;
+    const chatInput = document.getElementById('chat-input') as HTMLInputElement | null;
+    const chatLog = document.getElementById('chat-log');
+
+    if (chatForm && chatInput && chatLog) {
+      // 手元で確認するときは、手元で動かしているほうにつなぐ
+      const api =
+        location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+          ? 'http://localhost:8833/api/chat/alpine'
+          : 'https://alpine-demo.dmea8287-love2.workers.dev/api/chat/alpine';
+
+      const turns: { role: 'user' | 'assistant'; content: string }[] = [];
+      let waiting = false;
+
+      const bubble = (text: string, mine: boolean) => {
+        const el = document.createElement('div');
+        el.className = mine
+          ? 'self-end max-w-[86%] rounded-xl bg-accent-tint px-4 py-3 text-[14px] leading-[1.9] text-ink whitespace-pre-wrap'
+          : 'self-start max-w-[86%] rounded-xl border border-line-2 bg-panel px-4 py-3 text-[14px] leading-[1.9] text-ink whitespace-pre-wrap';
+        el.textContent = text;
+        chatLog.appendChild(el);
+        chatLog.scrollTop = chatLog.scrollHeight;
+        return el;
+      };
+
+      const ask = async (text: string) => {
+        const q = text.trim();
+        if (!q || waiting) return;
+        waiting = true;
+        chatInput.value = '';
+        bubble(q, true);
+        turns.push({ role: 'user', content: q });
+
+        const thinking = bubble('…', false);
+        try {
+          const res = await fetch(api, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ messages: turns.slice(-20) }),
+          });
+          const data = await res.json();
+          const reply =
+            typeof data.reply === 'string' && data.reply
+              ? data.reply
+              : 'すみません、うまく答えられませんでした。LINEから聞いてみてください。';
+          thinking.textContent = reply;
+          turns.push({ role: 'assistant', content: reply });
+        } catch {
+          thinking.textContent =
+            'うまくつながりませんでした。少し待ってからもう一度お願いします。';
+        } finally {
+          waiting = false;
+          chatLog.scrollTop = chatLog.scrollHeight;
+        }
+      };
+
+      chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        ask(chatInput.value);
+      });
+
+      document.querySelectorAll('.chat-chip').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          const q = chip.getAttribute('data-q') ?? '';
+          // 一度聞いた質問は消す（同じものを押し続けられないように）
+          chip.remove();
+          ask(q);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
