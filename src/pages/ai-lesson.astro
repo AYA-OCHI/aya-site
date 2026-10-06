@@ -1,0 +1,366 @@
+---
+// リロクラブ（福利厚生）掲載用のページ。
+// 既存の index.astro（お店向け・予約まわり）とは客層が違うので、完全に別ページにしている。
+// ⚠️ index.astro は触らないこと。見た目の決まり（色・字・幅）は tailwind.config.mjs を共有している。
+//
+// 【2026-10-06 方針】
+//   「AIの使い方を教える」は看板にしない（アカウント設計_2026-09-24.md の決まり）。
+//   困りごとを聞いて、それを減らす物を作る——Alpine本来のやり方をそのまま出す。
+//   相談は無料。お金は制作費でいただく。金額はサイトに出さない（2026-09-26の決まり）。
+const SITE_URL = 'https://alpine-site.dmea8287-love2.workers.dev';
+const PAGE_URL = `${SITE_URL}/ai-lesson`;
+const LINE_URL = 'https://lin.ee/RuLen1L';
+
+// ───────────────────────────────────────────────
+// 🔴 ここにGoogleカレンダーの予約ページのURLを貼ってください。
+//    取り方：Googleカレンダー → 予約スケジュール（30分のやつ）を開く
+//            → 「予約ページを開く」または「共有」→ URLをコピー
+//    空のままだと、予約ボタンの代わりにLINEの案内だけが出ます。
+// ───────────────────────────────────────────────
+const BOOKING_URL = 'https://calendar.app.google/xjgYTnZ6nA2pPsUJA';
+
+const troubles = [
+  {
+    title: '予約や日程の調整で、毎回おなじやりとりをしている',
+    desc: '「空いてますか」「その日は埋まっていて」「では別の日に」。1件ずつは短くても、ひと月ぶん集めると驚く時間になっています。',
+  },
+  {
+    title: '同じ質問に、何度も同じ答えを書いている',
+    desc: '営業時間、場所、持ち物、料金。聞かれるたびに打ち直している。一度書いておけば済むことが、毎回起きています。',
+  },
+  {
+    title: '数字の集計や確認を、毎月手で繰り返している',
+    desc: '売上をまとめる、名簿を照らし合わせる、送り忘れがないか見る。決まった手順の繰り返しは、いちばん自動にしやすいところです。',
+  },
+];
+
+const works = [
+  {
+    num: '01',
+    title: 'お店の予約を受ける仕組み',
+    desc: '予約を受ける画面と、お店側で見る管理画面、前日のお知らせまで。美容室の方からうかがった「予約の電話で手が止まる」という話から作りはじめたものです。',
+  },
+  {
+    num: '02',
+    title: 'お店のことを覚えたAI',
+    desc: 'ホームページの中に置いておくと、営業時間や料金の質問に、そのお店の情報をもとに答えます。同じ質問に毎回答える手間を減らすためのものです。',
+  },
+  {
+    num: '03',
+    title: '毎日の確認を自動にする仕組み',
+    desc: 'やることリストの未チェックを見つけて、夜にひとりでにお知らせが届く。「見落とした」をなくすための、小さな仕組みです。',
+  },
+  {
+    num: '04',
+    title: 'ホームページ・ネットショップ',
+    desc: '紹介ページ、ハンドメイド雑貨のネットショップ、会社の紹介サイトなど。見せたいものに合わせて作っています。',
+  },
+];
+
+const steps = [
+  {
+    num: 'STEP 1',
+    title: 'まず30分、話を聞かせてください',
+    desc: 'オンラインでお話をうかがいます。「何を作りたいか」が決まっていなくて構いません。むしろ「これが面倒」だけ持ってきてください。そこから一緒にほどいていきます。',
+    tag: '会員の方は無料',
+  },
+  {
+    num: 'STEP 2',
+    title: '減らせそうなところをお伝えします',
+    desc: 'うかがった話のうち、仕組みで減らせるところと、そうでないところを分けてお伝えします。作らないほうがいい場合は、はっきりそう言います。',
+    tag: '',
+  },
+  {
+    num: 'STEP 3',
+    title: '作る場合だけ、お見積もりを出します',
+    desc: '中身と期間と金額をお出しします。見てから決めてください。相談のあとに、こちらから催促することはありません。',
+    tag: '',
+  },
+];
+
+const faqs = [
+  {
+    q: '何を作ればいいか、まったく決まっていません。',
+    a: 'それで大丈夫です。むしろ、そこから始まることがほとんどです。「毎週これをやるのが面倒」「資料を作る時間が手間」。その程度の話で構いません。何が作れるかは、こちらで考えます。',
+  },
+  {
+    q: '相談したら、必ず頼まないといけませんか。',
+    a: 'いいえ。話を聞いて「これは作らないほうがいいです」とお伝えすることもあります。相談のあとにこちらから連絡を重ねることはしません。',
+  },
+  {
+    q: 'いくらくらいかかりますか。',
+    a: '作るものによって変わるため、相談の前に金額をお出しすることはしていません。小さな仕組みひとつと、お店まるごとの作り替えでは、何倍も違うためです。お話をうかがったうえで、中身と金額をお見積もりとしてお出しします。',
+  },
+  {
+    q: 'パソコンにくわしくありません。',
+    a: '大丈夫です。わたし自身、専門の学校を出ていないので、専門用語を使わずにご説明します。できあがったあとも、使い方は分かるまでご説明します。',
+  },
+  {
+    q: '遠方ですが大丈夫ですか。',
+    a: 'オンラインで全国からお受けしています。打ち合わせも納品もオンラインで完結します。',
+  },
+  {
+    q: '相談はいつできますか。',
+    a: '平日と土曜は夜（19時〜22時）、日曜は昼の時間もお受けしています。わたし自身、昼は別の仕事をしているため、お勤めの方と時間が合いやすいと思います。空いている時間は、予約ページでそのままご覧いただけます。',
+  },
+];
+---
+
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>その面倒、仕組みで減らせます ｜ Alpine</title>
+  <meta
+    name="description"
+    content="予約のやりとり、同じ質問への返信、毎月の集計。副業・個人のお店・教室の「毎回おなじことに時間を取られる」を、AIと小さな仕組みで減らします。まずは30分の相談から。"
+  />
+  <link rel="canonical" href={PAGE_URL} />
+  <link rel="icon" href="/alpine-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={PAGE_URL} />
+  <meta property="og:title" content="その面倒、仕組みで減らせます ｜ Alpine" />
+  <meta
+    property="og:description"
+    content="「毎回おなじことに時間を取られる」を、AIと小さな仕組みで減らします。まずは30分の相談から。"
+  />
+  <meta property="og:image" content={`${SITE_URL}/og-image.png`} />
+  <meta property="og:locale" content="ja_JP" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "742997caabec41f584d5796410e60e51"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</head>
+<body class="m-0 bg-page text-ink font-body antialiased">
+  <div class="min-h-full bg-page flex justify-center">
+    <div class="w-full max-w-[600px] bg-white shadow-[0_0_0_1px_#e4ecf5]">
+
+      <!-- header -->
+      <header id="top" class="border-b border-line">
+        <div class="px-6 py-5 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <img src="/alpine-icon.png" alt="Alpine" class="w-8 h-8 rounded-full" />
+            <span class="font-heading font-bold text-[17px] tracking-[0.04em]">Alpine</span>
+          </div>
+          <a href="#book" class="text-xs font-medium text-faint tracking-[0.06em] hover:text-accent transition-colors">
+            相談のご予約
+          </a>
+        </div>
+      </header>
+
+      <!-- hero -->
+      <section class="px-6 pt-[52px] pb-11 bg-gradient-to-b from-white to-band">
+        <p class="m-0 mb-[18px] text-[13px] font-medium text-accent tracking-[0.06em] leading-[1.7]">
+          副業・個人のお店・家業・教室をされている方へ
+        </p>
+        <h1 class="m-0 mb-6 font-heading font-bold text-[30px] leading-[1.55] tracking-[0.01em]">
+          毎回おなじことに、<br />時間を取られて<br />いませんか。
+        </h1>
+        <p class="m-0 mb-4 text-[15px] leading-[2.0] text-muted">
+          予約のやりとり、同じ質問への返信、毎月の集計。手でやっている決まった作業を、AIと小さな仕組みで減らしています。
+        </p>
+        <p class="m-0 mb-7 text-[15px] leading-[2.0] text-muted">
+          何を作ればいいかは、決まっていなくて大丈夫です。まず「これが面倒」だけ聞かせてください。
+        </p>
+        <a
+          href="#book"
+          class="inline-block px-7 py-3.5 rounded-full bg-accent text-white text-[15px] font-bold tracking-[0.02em] shadow-[0_2px_10px_rgba(28,156,137,0.25)] hover:bg-accent-dark transition-colors"
+        >
+          30分の相談を予約する
+        </a>
+        <p class="m-0 mt-3.5 text-xs leading-[1.9] text-fainter">
+          会員の方は無料です。ふだんは有料でお受けしている内容です。
+        </p>
+      </section>
+
+      <!-- こんな困りごと -->
+      <section class="px-6 py-12 border-b border-line">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">TROUBLES</p>
+        <h2 class="m-0 mb-7 font-heading font-bold text-[22px] leading-[1.6]">こんなことはありませんか</h2>
+        <div class="flex flex-col gap-6">
+          {troubles.map((t) => (
+            <div class="pl-4 border-l-[3px] border-accent-soft">
+              <p class="m-0 mb-1.5 font-heading font-bold text-[15px] leading-[1.7]">{t.title}</p>
+              <p class="m-0 text-[14px] leading-[1.95] text-muted">{t.desc}</p>
+            </div>
+          ))}
+        </div>
+        <p class="m-0 mt-7 text-[14px] leading-[1.95] text-muted">
+          どれも、やめるわけにはいかない作業です。けれど、ぜんぶを手でやり続ける必要もありません。
+        </p>
+      </section>
+
+      <!-- 作ってきたもの -->
+      <section class="px-6 py-12 border-b border-line bg-panel">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">WORKS</p>
+        <h2 class="m-0 mb-2 font-heading font-bold text-[22px] leading-[1.6]">これまで作ってきたもの</h2>
+        <p class="m-0 mb-8 text-[14px] leading-[1.95] text-muted">
+          どれも、誰かの「これが面倒」から始まったものです。
+        </p>
+        <div class="flex flex-col gap-7">
+          {works.map((w) => (
+            <div>
+              <p class="m-0 mb-1.5 font-heading font-bold text-[13px] text-accent tracking-[0.1em]">{w.num}</p>
+              <p class="m-0 mb-2 font-heading font-bold text-[16px] leading-[1.7]">{w.title}</p>
+              <p class="m-0 text-[14px] leading-[1.95] text-muted">{w.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 進め方 -->
+      <section class="px-6 py-12 border-b border-line">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">STEPS</p>
+        <h2 class="m-0 mb-7 font-heading font-bold text-[22px] leading-[1.6]">進め方</h2>
+        <div class="flex flex-col gap-7">
+          {steps.map((s) => (
+            <div>
+              <div class="flex items-center gap-2.5 mb-2">
+                <span class="font-heading font-bold text-[12px] text-accent tracking-[0.12em]">{s.num}</span>
+                {s.tag && (
+                  <span class="px-2.5 py-0.5 rounded-full bg-accent-tint text-[11px] font-bold text-accent-dark">{s.tag}</span>
+                )}
+              </div>
+              <p class="m-0 mb-2 font-heading font-bold text-[16px] leading-[1.7]">{s.title}</p>
+              <p class="m-0 text-[14px] leading-[1.95] text-muted">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- わたしについて -->
+      <section class="px-6 py-12 border-b border-line bg-panel">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">ABOUT</p>
+        <h2 class="m-0 mb-7 font-heading font-bold text-[22px] leading-[1.6]">作るのは、こういう人間です</h2>
+        <div class="flex items-start gap-4 mb-6">
+          <img
+            src="/brand/aya-04-hohoemi-cut.png"
+            alt=""
+            class="w-[88px] h-[88px] rounded-full object-cover bg-band shrink-0"
+          />
+          <div class="pt-1">
+            <p class="m-0 mb-1 font-heading font-bold text-[16px] leading-[1.6]">越智 亜弥</p>
+            <p class="m-0 text-[13px] leading-[1.8] text-fainter">Alpine ／ 愛媛県今治市</p>
+          </div>
+        </div>
+        <p class="m-0 mb-4 text-[15px] leading-[2.0] text-muted">
+          昼はタオル工場で働きながら、夜にこの仕事をしています。パソコンの学校には行っていませんし、もともと得意だったわけでもありません。
+        </p>
+        <p class="m-0 mb-4 text-[15px] leading-[2.0] text-muted">
+          だからこそ、「分からないところが分からない」という状態がよく分かります。専門用語で押し切ることはしません。できないことは、できないとお伝えします。
+        </p>
+        <p class="m-0 text-[15px] leading-[2.0] text-muted">
+          大きな会社ではないので、お話をうかがってから形になるまで、ぜんぶ同じ人間が担当します。途中で担当が変わることはありません。
+        </p>
+      </section>
+
+      <!-- 予約 -->
+      <section id="book" class="px-6 py-12 bg-band border-b border-band-line">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">BOOKING</p>
+        <h2 class="m-0 mb-4 font-heading font-bold text-[22px] leading-[1.6]">30分の相談を予約する</h2>
+        <p class="m-0 mb-6 text-[15px] leading-[2.0] text-muted">
+          オンライン（Google Meet）でお話しします。お送りするリンクを開くだけで始められるので、アプリを入れる必要はありません。
+        </p>
+
+        <div class="mb-6 p-4 rounded-lg bg-white border border-band-line">
+          <p class="m-0 mb-1 text-[13px] font-bold text-ink">相談（30分）｜会員の方は無料</p>
+          <p class="m-0 text-xs leading-[1.9] text-fainter">
+            ふだんは有料でお受けしている内容です。相談のあとに、こちらから催促することはありません。
+          </p>
+        </div>
+
+        {BOOKING_URL ? (
+          <>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener"
+              class="inline-block px-7 py-3.5 rounded-full bg-accent text-white text-[15px] font-bold tracking-[0.02em] shadow-[0_2px_10px_rgba(28,156,137,0.25)] hover:bg-accent-dark transition-colors"
+            >
+              空いている日から選ぶ
+            </a>
+            <p class="m-0 mt-3.5 mb-7 text-xs leading-[1.9] text-fainter">
+              カレンダーから直接お選びいただけます。登録や友だち追加は要りません。
+            </p>
+
+            <div class="mb-7">
+              <p class="m-0 mb-3 text-[13px] font-bold text-ink">ご予約のあと</p>
+              <ol class="m-0 pl-[1.3em] list-decimal marker:text-accent marker:font-bold marker:text-[12px] flex flex-col gap-2">
+                <li class="text-[13px] leading-[1.9] text-muted">
+                  ご入力のメールアドレスに、確認のメールが届きます
+                </li>
+                <li class="text-[13px] leading-[1.9] text-muted">
+                  当日は、そのメールにあるリンクを開くだけで始まります
+                </li>
+                <li class="text-[13px] leading-[1.9] text-muted">
+                  ご都合が変わった場合も、同じメールから変更・取り消しができます
+                </li>
+              </ol>
+              <p class="m-0 mt-3 text-xs leading-[1.9] text-fainter">
+                ご予約のときに、困っていることを一行だけ書いていただけると、こちらで調べたうえでお話しできます。
+              </p>
+            </div>
+
+            <p class="m-0 text-[13px] leading-[1.9] text-faint">
+              日程が合わない場合や、先に文章で聞いてみたい場合は
+              <a href={LINE_URL} target="_blank" rel="noopener" class="text-accent underline underline-offset-2">LINE</a>
+              からもどうぞ。
+            </p>
+          </>
+        ) : (
+          <>
+            <a
+              href={LINE_URL}
+              target="_blank"
+              rel="noopener"
+              class="inline-block px-7 py-3.5 rounded-full bg-accent text-white text-[15px] font-bold tracking-[0.02em] shadow-[0_2px_10px_rgba(28,156,137,0.25)] hover:bg-accent-dark transition-colors"
+            >
+              LINEで質問してみる
+            </a>
+            <p class="m-0 mt-3.5 text-xs leading-[1.9] text-fainter">
+              「こんなことでも頼めますか」で構いません。日程はやりとりの中で決めます。昼は別の仕事をしているため、お返事が夜になることがあります。
+            </p>
+          </>
+        )}
+      </section>
+
+      <!-- よくある質問 -->
+      <section class="px-6 py-12 border-b border-line">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">Q &amp; A</p>
+        <h2 class="m-0 mb-7 font-heading font-bold text-[22px] leading-[1.6]">よくあるご質問</h2>
+        <div class="flex flex-col gap-6">
+          {faqs.map((f) => (
+            <div>
+              <p class="m-0 mb-2 font-heading font-bold text-[15px] leading-[1.75]">
+                <span class="text-accent mr-1.5">Q.</span>{f.q}
+              </p>
+              <p class="m-0 text-[14px] leading-[1.95] text-muted pl-[1.6em]">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- footer -->
+      <footer class="px-6 py-9">
+        <p class="m-0 mb-1.5 font-heading font-bold text-[15px] tracking-[0.04em]">Alpine</p>
+        <p class="m-0 mb-4 text-xs leading-[1.9] text-fainter">
+          愛媛県今治市／オンラインで全国対応
+        </p>
+        <a href="/" class="text-xs text-faint hover:text-accent transition-colors">
+          お店・事業者の方へ（ホームページ制作・予約の仕組み）
+        </a>
+      </footer>
+
+    </div>
+  </div>
+</body>
+</html>
