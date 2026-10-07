@@ -20,24 +20,31 @@ const works = [
   },
   {
     num: '02',
+    title: 'デザイナーのポートフォリオサイト',
+    desc: 'デザイン事務所「Plump berry」の公式サイト。デザイナーご本人の絵とロゴをそのまま活かして組み立てました。制作実績21点をカテゴリ別に切り替えて見られます。',
+    url: 'https://plumpberry.deci.jp',
+    urlLabel: 'plumpberry.deci.jp',
+  },
+  {
+    num: '03',
     title: '美容室紹介ページ',
     desc: 'サロンの雰囲気が伝わるフォトギャラリーと、メニュー・アクセス情報をまとめた紹介ページ。',
     images: ['/works/work-02.jpg'],
   },
   {
-    num: '03',
+    num: '04',
     title: 'ハンドメイド雑貨のネットショップ',
     desc: 'ピアス・イヤリングなどのハンドメイドアクセサリーを、カテゴリ別に見やすく並べたネットショップ。',
     images: ['/works/work-03.jpg'],
   },
   {
-    num: '04',
+    num: '05',
     title: '企業紹介サイト',
     desc: '会社概要・事業内容・サービス案内をまとめた、企業向けの紹介サイト。',
     images: ['/works/work-04.jpg'],
   },
   {
-    num: '05',
+    num: '06',
     title: '毎日のタスク管理アプリ',
     desc: 'やることリストの未チェック項目を検知して、夜に自動でリマインドメールが届く仕組み',
   },
@@ -340,6 +347,16 @@ const navItems = [
                 <div>
                   <p class="m-0 mb-1 text-[15px] font-medium leading-[1.7]">{w.title}</p>
                   <p class="m-0 text-[13px] text-fainter leading-[1.8]">{w.desc}</p>
+                  {w.url && (
+                    <a
+                      href={w.url}
+                      target="_blank"
+                      rel="noopener"
+                      class="inline-flex items-center gap-1.5 mt-2.5 text-[13px] font-bold text-accent hover:text-accent-dark transition-colors"
+                    >
+                      {w.urlLabel} →
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
