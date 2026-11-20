@@ -11,12 +11,18 @@ const demoQuestions = [
   'このAIも作ってもらえますか？',
 ];
 
+// ⚠️ 並び順は「一人サロンの人が、上から読んで自分ごとにできる順」（2026-11-20に並べ替えた）。
+//    ①サロンそのもの ②実物が開ける唯一の1件（この下のVOICEの声も、この方のもの）
+//    ③ひとりでやっているお店で、予約もお支払いも回している ④⑤⑥ それ以外
+//    消していないのは、どれも実際に作った物で、減らすと「比較して安心したいとき」の材料が減るため。
 const works = [
   {
     num: '01',
-    title: '占い・オーラ鑑定 LP＋オーラ診断アプリ',
-    desc: '友人と営む事業のページ制作に加え、生年月日・お名前・お顔写真からオーラを鑑定するWebアプリも。顔写真はAIの画像解析で分析、アプリ自体もAI（Claude）を使って開発',
-    images: ['/works/work-01.jpg', '/works/work-01b.jpg'],
+    title: '美容室紹介ページ',
+    desc: 'サロンの雰囲気が伝わるフォトギャラリーと、メニュー・アクセス情報をまとめた紹介ページ。',
+    images: ['/works/work-02.jpg'],
+    url: 'https://alpine.main.jp/berry/',
+    urlLabel: 'alpine.main.jp/berry',
   },
   {
     num: '02',
@@ -27,24 +33,39 @@ const works = [
   },
   {
     num: '03',
-    title: '美容室紹介ページ',
-    desc: 'サロンの雰囲気が伝わるフォトギャラリーと、メニュー・アクセス情報をまとめた紹介ページ。',
-    images: ['/works/work-02.jpg'],
+    title: '占い・オーラ鑑定の公式サイト',
+    desc: '友人と営む事業の公式サイト。メニューと料金、初めての方へ、よくある質問から、ご予約・お申し込みまで。',
+    images: ['/works/work-01.jpg'],
+    url: 'https://plumpberry.deci.jp/tome-nesan/',
+    urlLabel: 'plumpberry.deci.jp/tome-nesan',
   },
   {
     num: '04',
+    title: 'オーラ診断アプリ',
+    desc: '生年月日・お名前・お顔写真からオーラを鑑定するWebアプリ。顔写真はAIの画像解析で分析、アプリ自体もAI（Claude）を使って開発',
+    images: ['/works/work-01b.jpg'],
+    url: 'https://plumpberry.deci.jp/uranai/',
+    urlLabel: 'plumpberry.deci.jp/uranai',
+  },
+  {
+    // ⚠️ このネットショップだけURLを付けていない。ページが崩れていて、
+    //    いま開いていただける形になっていないため（2026-11-20 あやちゃん）。
+    num: '05',
     title: 'ハンドメイド雑貨のネットショップ',
     desc: 'ピアス・イヤリングなどのハンドメイドアクセサリーを、カテゴリ別に見やすく並べたネットショップ。',
     images: ['/works/work-03.jpg'],
   },
   {
-    num: '05',
+    num: '06',
     title: '企業紹介サイト',
     desc: '会社概要・事業内容・サービス案内をまとめた、企業向けの紹介サイト。',
     images: ['/works/work-04.jpg'],
+    url: 'https://alpine.main.jp/corporatesite/',
+    urlLabel: 'alpine.main.jp/corporatesite',
   },
   {
-    num: '06',
+    // ⚠️ サイトは2026-09-29に閉じたのでURLは付けられない（[[project_posting_routine_app]]）
+    num: '07',
     title: '毎日のタスク管理アプリ',
     desc: 'やることリストの未チェック項目を検知して、夜に自動でリマインドメールが届く仕組み',
   },
@@ -136,12 +157,15 @@ const guides = [
   '公開までに必要なものの確認',
 ];
 
+// ⚠️ 並び順は、ページのセクションの順と同じにしておくこと（2026-11-20に services を上へ動かした）。
+//    触ってみる → できること・料金 → 誰がやっているか → 実績 → 声 の順。
+//    「商品が分かるまで、相手は比べられない」ので、作るものと費用を先に出す。
 const navItems = [
   { id: 'demo', label: 'Demo' },
+  { id: 'services', label: 'Services' },
   { id: 'about', label: 'About' },
   { id: 'works', label: 'Works' },
   { id: 'voice', label: 'Voice' },
-  { id: 'services', label: 'Services' },
   { id: 'guides', label: 'Guides' },
   { id: 'contact', label: 'Contact' },
 ];
@@ -247,6 +271,30 @@ const navItems = [
         <h2 class="m-0 mb-3 font-heading font-bold text-[22px] leading-[1.6]">
           試しに、触ってみてください
         </h2>
+        <h3 class="m-0 mb-3 font-heading font-bold text-[18px] leading-[1.6]">
+          美容室の予約画面
+        </h3>
+        <p class="m-0 mb-5 text-[14.5px] leading-[2.0] text-muted">
+          架空の「ヘアサロン みなみ」で作った、予約の画面です。メニューを選んで、日にちを選ぶ。<b
+            class="font-bold text-ink">最後まで触れます。</b><br />
+          色も、あいさつの言葉も、メニューの説明も、お店ごとに変えられます。本当の予約は入りませんので、何度でもどうぞ。
+        </p>
+        <a
+          href="https://salon-yoyaku-demo.dmea8287-love2.workers.dev"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 h-[46px] px-5 rounded-lg bg-accent text-white text-[14px] font-bold tracking-[0.04em] no-underline transition-colors hover:bg-accent-dark"
+        >
+          予約の見本を開く →
+        </a>
+
+        <!-- ⚠️ 予約の見本を先、AIチャットを後にしてある（2026-11-20に入れ替えた）。
+             一人サロンの予約で来た人が、最初に触れるのが予約の画面になるように。
+             ボタンは増やさない（ハッピーさん「どっちにしたらいいのと考えさせない」）。 -->
+        <p class="m-0 mt-9 pt-7 border-t border-band-line mb-2 text-xs font-bold text-accent tracking-[0.14em]">もうひとつの見本</p>
+        <h3 class="m-0 mb-3 font-heading font-bold text-[18px] leading-[1.6]">
+          お店のことを覚えたAI
+        </h3>
         <p class="m-0 mb-6 text-[14.5px] leading-[2.0] text-muted">
           下のAIは、Alpineのことだけを覚えています。料金や、できることを聞いてみてください。わたしの代わりに答えます。<br />
           お店のホームページには、<b class="font-bold text-ink">そのお店のことを覚えたAI</b>が、この形でついてきます。
@@ -297,30 +345,65 @@ const navItems = [
         <p class="m-0 mt-3.5 text-[12px] leading-[1.9] text-fainter">
           AIが答えているので、実際と違うことがあります。お申し込みやお見積もりは、LINEから承ります。
         </p>
+      </section>
 
-        <div class="mt-9 pt-7 border-t border-band-line">
-          <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">もうひとつの見本</p>
-          <h3 class="m-0 mb-3 font-heading font-bold text-[18px] leading-[1.6]">
-            美容室の予約画面
-          </h3>
-          <p class="m-0 mb-5 text-[14.5px] leading-[2.0] text-muted">
-            架空の「ヘアサロン みなみ」で作った、予約の画面です。メニューを選んで、日にちを選ぶ。<b
-              class="font-bold text-ink">最後まで触れます。</b><br />
-            色も、あいさつの言葉も、メニューの説明も、お店ごとに変えられます。本当の予約は入りませんので、何度でもどうぞ。
-          </p>
-          <a
-            href="https://salon-yoyaku-demo.dmea8287-love2.workers.dev"
-            target="_blank"
-            rel="noopener"
-            class="inline-flex items-center gap-2 h-[46px] px-5 rounded-lg bg-accent text-white text-[14px] font-bold tracking-[0.04em] no-underline transition-colors hover:bg-accent-dark"
-          >
-            予約の見本を開く →
-          </a>
+      <!-- services -->
+      <section id="services" class="px-6 pt-[52px] pb-[52px] border-t border-line">
+        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">SERVICES</p>
+        <h2 class="m-0 mb-7 font-heading font-bold text-[22px] leading-[1.6]">できること</h2>
+        <div class="flex flex-col gap-[26px]">
+          {services.map((s) => (
+            <div class={`pl-4 border-l-[3px] ${s.accent}`}>
+              <p class="m-0 mb-1.5 text-[17px] font-bold font-heading leading-[1.6]">{s.title}</p>
+              <p class="m-0 mb-2 text-sm leading-[2.0] text-muted">{s.desc}</p>
+              {s.price && (
+                <div class="mt-3.5 mb-3 rounded-lg border border-line-2 bg-panel px-4 py-3.5 flex flex-col gap-3">
+                  {s.price.map((r) => (
+                    <div>
+                      <div class="flex items-baseline gap-2.5">
+                        <span class="text-[13px] font-bold text-faint tracking-[0.06em] w-[44px] flex-none">{r.label}</span>
+                        {r.was && (
+                          <span class="text-[13px] text-fainter line-through decoration-[1.5px]">{r.was}</span>
+                        )}
+                        <span class="text-[17px] font-bold text-accent-dark">{r.now}</span>
+                      </div>
+                      <p class="m-0 mt-1 text-[12.5px] leading-[1.85] text-fainter">{r.note}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <p class="m-0 text-[13px] text-fainter leading-[1.8]">詳しくはCONTACTから</p>
+            </div>
+          ))}
         </div>
+
+        <div class="mt-9 pt-8 border-t border-line-2">
+          <p class="m-0 mb-1 text-[13px] font-bold text-accent tracking-[0.1em]">業務アプリの例</p>
+          <p class="m-0 mb-5 text-[13px] text-faint leading-[1.9]">
+            たとえば、こんな仕組みがつくれます。ここにないことでも、お店に合わせて考えますので、まずはご相談ください。
+          </p>
+          <div class="flex flex-col gap-3">
+            {appExamples.map((e) => (
+              <div class="bg-white border border-line-2 rounded-lg px-5 py-4">
+                <p class="m-0 mb-1 text-[15px] font-medium leading-[1.7]">{e.title}</p>
+                <p class="m-0 text-[13px] text-fainter leading-[1.8]">{e.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <a
+          href={LINE_URL}
+          target="_blank"
+          rel="noopener"
+          class="mt-[34px] flex items-center justify-center h-[60px] rounded-lg bg-accent text-white text-base font-bold tracking-[0.03em] transition-colors hover:bg-accent-dark"
+        >
+          サービスについて聞いてみる
+        </a>
       </section>
 
       <!-- about -->
-      <section id="about" class="px-6 pt-[52px] pb-[52px] border-t border-line">
+      <section id="about" class="px-6 pt-[52px] pb-[52px] bg-band border-t border-band-line">
         <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">ABOUT</p>
         <h2 class="m-0 mb-[26px] font-heading font-bold text-[22px] leading-[1.6]">
           毎日、お客様の返信をしています。
@@ -335,7 +418,7 @@ const navItems = [
         <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">WORKS</p>
         <h2 class="m-0 mb-2 font-heading font-bold text-[22px] leading-[1.6]">制作サンプル</h2>
         <p class="m-0 mb-7 text-sm leading-[1.9] text-faint">
-          これまでに作ったサイト・アプリです。業種も目的もそれぞれ違います。
+          これまでに作ったサイト・アプリです。お店のページから、ネットショップや業務のアプリまで。
         </p>
         <div class="flex flex-col gap-3">
           {works.map((w) => (
@@ -394,63 +477,9 @@ const navItems = [
         </figure>
       </section>
 
-      <!-- services -->
-      <section id="services" class="px-6 pt-[52px] pb-[52px] border-t border-line">
-        <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">SERVICES</p>
-        <h2 class="m-0 mb-7 font-heading font-bold text-[22px] leading-[1.6]">できること</h2>
-        <div class="flex flex-col gap-[26px]">
-          {services.map((s) => (
-            <div class={`pl-4 border-l-[3px] ${s.accent}`}>
-              <p class="m-0 mb-1.5 text-[17px] font-bold font-heading leading-[1.6]">{s.title}</p>
-              <p class="m-0 mb-2 text-sm leading-[2.0] text-muted">{s.desc}</p>
-              {s.price && (
-                <div class="mt-3.5 mb-3 rounded-lg border border-line-2 bg-panel px-4 py-3.5 flex flex-col gap-3">
-                  {s.price.map((r) => (
-                    <div>
-                      <div class="flex items-baseline gap-2.5">
-                        <span class="text-[13px] font-bold text-faint tracking-[0.06em] w-[44px] flex-none">{r.label}</span>
-                        {r.was && (
-                          <span class="text-[13px] text-fainter line-through decoration-[1.5px]">{r.was}</span>
-                        )}
-                        <span class="text-[17px] font-bold text-accent-dark">{r.now}</span>
-                      </div>
-                      <p class="m-0 mt-1 text-[12.5px] leading-[1.85] text-fainter">{r.note}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-              <p class="m-0 text-[13px] text-fainter leading-[1.8]">詳しくはCONTACTから</p>
-            </div>
-          ))}
-        </div>
-
-        <div class="mt-9 pt-8 border-t border-line-2">
-          <p class="m-0 mb-1 text-[13px] font-bold text-accent tracking-[0.1em]">業務アプリの例</p>
-          <p class="m-0 mb-5 text-[13px] text-faint leading-[1.9]">
-            たとえば、こんな仕組みがつくれます。ここにないことでも、お店に合わせて考えますので、まずはご相談ください。
-          </p>
-          <div class="flex flex-col gap-3">
-            {appExamples.map((e) => (
-              <div class="bg-white border border-line-2 rounded-lg px-5 py-4">
-                <p class="m-0 mb-1 text-[15px] font-medium leading-[1.7]">{e.title}</p>
-                <p class="m-0 text-[13px] text-fainter leading-[1.8]">{e.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <a
-          href={LINE_URL}
-          target="_blank"
-          rel="noopener"
-          class="mt-[34px] flex items-center justify-center h-[60px] rounded-lg bg-accent text-white text-base font-bold tracking-[0.03em] transition-colors hover:bg-accent-dark"
-        >
-          サービスについて聞いてみる
-        </a>
-      </section>
 
       <!-- guides -->
-      <section id="guides" class="px-6 pt-[52px] pb-[52px] bg-band border-t border-band-line">
+      <section id="guides" class="px-6 pt-[52px] pb-[52px] bg-panel border-t border-line">
         <p class="m-0 mb-2 text-xs font-bold text-accent tracking-[0.14em]">GUIDES</p>
         <h2 class="m-0 mb-5 font-heading font-bold text-[22px] leading-[1.6]">LINEでできること</h2>
         <div class="flex flex-col gap-3.5 mb-2">
